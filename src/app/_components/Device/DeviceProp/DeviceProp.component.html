@@ -1,0 +1,38 @@
+<h2>Device</h2>
+<form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">Firma</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Firma jest wymagana</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" formControlName="model" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.model.errors }" />
+        <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
+            <div *ngIf="f.model.errors.required">Model jest wymagany</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="serialNumber">Numer seryjny</label>
+        <input type="text" formControlName="serialNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.serialNumber.errors }" />
+        <div *ngIf="submitted && f.serialNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.serialNumber.errors.required">Numer seryjny jest wymagany</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="instalationDate">Data instalacji</label>
+        <input type="datetime" formControlName="instalationDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.instalationDate.errors }" />
+        <div *ngIf="submitted && f.instalationDate.errors" class="invalid-feedback">
+            <div *ngIf="f.instalationDate.errors.required">Data instalacji urzadzenia jest wymagana</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Ok
+        </button>
+        <a routerLink="/devices" class="btn btn-link">Cancel</a>
+    </div>
+</form>

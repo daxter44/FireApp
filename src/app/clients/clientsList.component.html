@@ -1,0 +1,12 @@
+﻿<h3>Your all clients:</h3>
+<ul>
+    <li *ngFor="let client of clients">
+        ({{client.firstName}} {{client.lastName}})
+        - <a routerLink="/addDevice/{{client.clientId}}">Add device</a>      
+        - <a routerLink="/editClient/{{client.clientId}}">Edit</a>
+        - <a (click)="deleteUser(client.clientId)" class="text-danger">Delete</a>
+    </li>
+</ul>
+<button routerLink="/addClient" class="btn btn-primary">
+    Add client
+</button>
