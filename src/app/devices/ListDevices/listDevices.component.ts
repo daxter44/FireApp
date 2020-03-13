@@ -9,15 +9,19 @@ import { FirmService, AuthenticationService, DeviceService, AlertService } from 
 import { Role } from '@/_models/role';
 import { Router } from '@angular/router';
 
-@Component({ selector:'listDevices', templateUrl: 'listDevices.component.html' })
+@Component({
+  selector:'listDevices',
+  templateUrl: 'listDevices.component.html',
+  styleUrls: ['listDevices.component.css']
+ })
 export class ListDevicesComponent implements OnInit {
     currentUser: User;
-    devices = [];    
+    devices = [];
     displayedColumns= ["name", "model", "serialNumber", "instalationDate"];
 
     constructor(
         private authenticationService: AuthenticationService,
-        private firmService: FirmService,        
+        private firmService: FirmService,
         private deviceService: DeviceService,
         private alertService: AlertService,
         private router: Router
@@ -30,7 +34,7 @@ export class ListDevicesComponent implements OnInit {
 
     ngOnInit() {
         this.loadlistDevicess();
-    }    
+    }
 
     deleteDevice(id: number) {
         this.deviceService.delete(id)
@@ -43,9 +47,9 @@ export class ListDevicesComponent implements OnInit {
             .subscribe(
                     devices => {
                         this.devices = devices
-                    }, 
+                    },
                     error => {
                         this.alertService.error(error);
-                    }); 
+                    });
     }
 }
