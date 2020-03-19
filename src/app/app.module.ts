@@ -23,6 +23,14 @@ import { EditClientPropComponent } from './_components/Client/EditClientProp/Edi
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table'  ;
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import { DeviceStatus } from './_models/deviceStatus';
+import { DeviceStatusComponent } from './devices/DeviceStatus/DeviceStatus.component';
 
 
 @NgModule({
@@ -41,7 +49,8 @@ import { MatTableModule } from '@angular/material/table'  ;
     EditClientComponent,
     EditClientPropComponent,
     ClientsList,
-    RegisterComponent
+    RegisterComponent,
+    DeviceStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +58,16 @@ import { MatTableModule } from '@angular/material/table'  ;
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,    
+    MatIconModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [
+    MatDatepickerModule,  
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

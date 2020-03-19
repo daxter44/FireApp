@@ -16,6 +16,9 @@ export class DeviceService {
     getDevice(id: string) {
         return this.http.get<Device>(`${environment.baseUrl}/device/${id}`);
     }
+    getDeviceDetails(id: string) {
+        return this.http.get<Device>(`${environment.baseUrl}/device/details/${id}`);
+    }
 
     add(device: Device) {
         return this.http.post(`${environment.baseUrl}/device`, device);

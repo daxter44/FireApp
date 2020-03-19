@@ -1,9 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-import {ActivatedRoute} from "@angular/router";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from "@angular/material/table";
 import { User } from '@/_models';
 import { FirmService, AuthenticationService, DeviceService, AlertService } from '@/_services';
 import { Role } from '@/_models/role';
@@ -17,7 +13,7 @@ import { Router } from '@angular/router';
 export class ListDevicesComponent implements OnInit {
     currentUser: User;
     devices = [];
-    displayedColumns= ["name", "model", "serialNumber", "instalationDate"];
+    displayedColumns= ["name", "model", "serialNumber", "instalationDate", "actions"];
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -36,6 +32,12 @@ export class ListDevicesComponent implements OnInit {
         this.loadlistDevicess();
     }
 
+    deviceDetails(id: number) {
+        this.router.navigate(['/deviceDetail/' + id]);
+    }
+    editDevice(id: number) {
+        this.router.navigate(['/editDevice/' + id]);
+    }
     deleteDevice(id: number) {
         this.deviceService.delete(id)
             .pipe(first())

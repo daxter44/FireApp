@@ -21,12 +21,12 @@
             <div *ngIf="f.serialNumber.errors.required">Numer seryjny jest wymagany</div>
         </div>
     </div>
+    
     <div class="form-group">
-        <label for="instalationDate">Data instalacji</label>
-        <input type="datetime" formControlName="instalationDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.instalationDate.errors }" />
-        <div *ngIf="submitted && f.instalationDate.errors" class="invalid-feedback">
-            <div *ngIf="f.instalationDate.errors.required">Data instalacji urzadzenia jest wymagana</div>
-        </div>
+        <label for="instalationDate">Data instalacji</label> <br>
+        <input matInput formControlName="instalationDate" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </div>
     <div class="form-group">
         <button [disabled]="loading" class="btn btn-primary">

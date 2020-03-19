@@ -9,12 +9,14 @@ import { AddDeviceComponent } from './devices/AddDevice';
 import { EditDeviceComponent } from './devices/EditDevice';
 import { AddClientComponent } from './clients/AddClient';
 import { EditClientComponent } from './clients/EditClient';
+import { DeviceStatusComponent } from './devices/DeviceStatus/DeviceStatus.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },    
   { path: 'myDevices', component: MyDeviceComponent },  
   { path: 'devices', component: ListDevicesComponent },  
+  { path: 'deviceDetail/:id', component: DeviceStatusComponent },  
   { path: 'addDevice/:id', component: AddDeviceComponent },
   { path: 'editDevice/:id', component: EditDeviceComponent },
   { path: 'addClient', component: AddClientComponent },
