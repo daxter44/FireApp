@@ -18,57 +18,58 @@ export class EditClientComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private clientService: ClientService, 
-    private userService: UserService,    
+    private clientService: ClientService,
+    private userService: UserService,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService) { 
-      this.clientForm = new FormGroup({  
+    private alertService: AlertService) {
+      this.clientForm = new FormGroup({
         firstName: new FormControl('', Validators.required),
         lastName: new FormControl('', Validators.required),
-        user: new FormGroup({      
+        user: new FormGroup({
           email:  new FormControl('', [Validators.required, Validators.minLength(6)])
           }),
-        address: new FormGroup({       
+        address: new FormGroup({
           city: new FormControl('', [Validators.required, Validators.minLength(3)]),
           street:  new FormControl('', [Validators.required, Validators.minLength(3)]),
           houseNumber:  new FormControl('', [Validators.required, Validators.minLength(3)]),
           zipCode:  new FormControl('', [Validators.required, Validators.minLength(3)]),
           })
         });
-    if (this.authenticationService.currentUserValue == null) {
+      if (this.authenticationService.currentUserValue == null) {
       this.router.navigate(['/']);
     }
     }
 
     ngOnInit(): void {
-     
-      this.getClient();
+
+      this.client = this.route.snapshot.data['client'];
+      this.fillForm(this.client);
     }
 
     getClient(): void {
       const id  = this.route.snapshot.paramMap.get('id');
       this.clientId=id;
       this.clientService.getClient(id)
-        .subscribe(client => { this.fillForm(client) });      
+        .subscribe(client => { this.fillForm(client) });
     }
     fillForm(prop: Client): void{
       if(prop != null ){
         this.clientForm.patchValue({
-          firstName: prop.firstName, 
+          firstName: prop.firstName,
           lastName: prop.lastName,
           user: {
             email: prop.user.eMail
           },
           address: {
-            city: prop.address.city,            
-            street: prop.address.street,            
+            city: prop.address.city,
+            street: prop.address.street,
             houseNumber: prop.address.houseNumber,
             zipCode: prop.address.zipCode
           }
-        });} 
+        });}
     }
 
     get f() { return this.clientForm.controls; }

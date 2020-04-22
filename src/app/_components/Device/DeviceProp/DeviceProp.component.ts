@@ -10,7 +10,7 @@ import { Device } from '@/_models';
   selector: 'DeviceProp',
   templateUrl: './DeviceProp.component.html'
 })
-export class DevicePropComponent implements OnInit, OnChanges {
+export class DevicePropComponent implements OnInit {
   @Input()  device: Device;
   @Output() submited = new EventEmitter<Device>();
   deviceForm: FormGroup;
@@ -20,7 +20,7 @@ export class DevicePropComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private alertService: AlertService
 ) {
-   
+
 }
 
 ngOnInit() {
@@ -30,19 +30,17 @@ ngOnInit() {
       serialNumber: ['', Validators.required],
       instalationDate: ['', Validators.required]
   });
-  
+  this.fillForm();
 }
-ngOnChanges(changes: SimpleChanges) {
-  if (changes.device) {    
-    this.device = changes.device.currentValue;
-    if(this.device != null ){
-      this.deviceForm.controls.name.setValue(this.device.name)
-      this.deviceForm.controls.model.setValue(this.device.model)
-      this.deviceForm.controls.serialNumber.setValue(this.device.serialNumber)
-      this.deviceForm.controls.instalationDate.setValue(this.device.instalationDate) 
-    } 
+  fillForm(): void {
+    if (this.device != null && this.deviceForm != undefined) {
+      this.deviceForm.controls.name.setValue(this.device.name);
+      this.deviceForm.controls.model.setValue(this.device.model);
+      this.deviceForm.controls.serialNumber.setValue(this.device.serialNumber);
+      this.deviceForm.controls.instalationDate.setValue(this.device.instalationDate);
+    }
   }
-}
+
     // convenience getter for easy access to form fields
     get f() { return this.deviceForm.controls; }
     onSubmit() {
@@ -56,6 +54,6 @@ ngOnChanges(changes: SimpleChanges) {
           return;
       }
       this.loading = true;
-      this.submited.emit(this.deviceForm.value);   
+      this.submited.emit(this.deviceForm.value);
   }
 }

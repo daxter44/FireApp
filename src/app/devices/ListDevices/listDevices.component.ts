@@ -3,24 +3,25 @@ import { first } from 'rxjs/operators';
 import { User } from '@/_models';
 import { FirmService, AuthenticationService, DeviceService, AlertService } from '@/_services';
 import { Role } from '@/_models/role';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector:'listDevices',
+  selector: 'listDevices',
   templateUrl: 'listDevices.component.html',
   styleUrls: ['listDevices.component.css']
  })
 export class ListDevicesComponent implements OnInit {
     currentUser: User;
     devices = [];
-    displayedColumns= ["name", "model", "serialNumber", "instalationDate", "actions"];
+    displayedColumns = ['name', 'model', 'serialNumber', 'instalationDate', 'actions'];
 
     constructor(
         private authenticationService: AuthenticationService,
         private firmService: FirmService,
         private deviceService: DeviceService,
         private alertService: AlertService,
-        private router: Router
+        private router: Router,
+        private activatedRouter: ActivatedRoute
     ) {
         if (this.authenticationService.currentUserValue.role != Role.Firm) {
             this.router.navigate(['/']);
@@ -29,7 +30,7 @@ export class ListDevicesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loadlistDevicess();
+        this.devices = this.activatedRouter.snapshot.data.devices;
     }
 
     deviceDetails(id: number) {
@@ -48,7 +49,7 @@ export class ListDevicesComponent implements OnInit {
             .pipe(first())
             .subscribe(
                     devices => {
-                        this.devices = devices
+                        this.devices = devices;
                     },
                     error => {
                         this.alertService.error(error);

@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 import { User } from '@/_models';
 import { UserService, AuthenticationService, FirmService } from '@/_services';
 import { ClientService } from '@/_services/client.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, UrlTree, Route } from '@angular/router';
 
 @Component({
     selector: 'ClientsList', templateUrl: 'clientsList.component.html',
@@ -19,13 +19,14 @@ export class ClientsList implements OnInit {
         private authenticationService: AuthenticationService,
         private clientService: ClientService,
         private firmService: FirmService,
+        private activatedRouter: ActivatedRoute,
         private router: Router
     ) {
         this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit() {
-        this.loadAllClients();
+        this.clients = this.activatedRouter.snapshot.data.clients;
     }
     editUser(id: number) {
         this.router.navigate(['/editClient/' + id]);

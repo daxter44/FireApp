@@ -16,7 +16,7 @@ deviceId: string;
   constructor(
     private deviceService: DeviceService,    
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private alertService: AlertService) { 
       // redirect to home if already logged in
@@ -25,11 +25,12 @@ deviceId: string;
   }
     }
 
-    ngOnInit(): void {
-      this.getDevice();
+    ngOnInit(): void {      
+      
+      this.device = this.activatedRoute.snapshot.data['device'];
     }
     getDevice(): void {
-      const id  = this.route.snapshot.paramMap.get('id');
+      const id  = this.activatedRoute.snapshot.paramMap.get('id');
       this.deviceId=id;
       this.deviceService.getDevice(id)
         .subscribe(device => this.device = device);
