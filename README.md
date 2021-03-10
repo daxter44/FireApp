@@ -1,6 +1,10 @@
 # FireApp
+Projekt front-end do aplikacji FireApi 
+W lokalizacji FireApp/src/App/ znajduje się aplikacja 
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
+
 
 ## Development server
 
