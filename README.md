@@ -1,6 +1,7 @@
 # FireApp
 Projekt front-end do aplikacji FireApi 
 W lokalizacji FireApp/src/App/ znajduje się aplikacja 
+W lokalizacji FireApp/src/Environment należy ustawić adres API a następnie uruchomi jak poniżej
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.5.
